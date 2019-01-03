@@ -1,8 +1,11 @@
 import React from 'react'
-const Counter = props => {
+import Counter from '../components/Counter'
+const CounterPage = props => {
   return (
-    <div>Counter</div>
+    <div>
+      <Counter />
+    </div>
   )
 }
-React.propTypes = {}
-export default Counter;
+Counter.propTypes = {}
+export default CounterPage;

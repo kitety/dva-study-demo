@@ -12,7 +12,9 @@ const app = dva({
 // app.use({});
 
 // 3. Model
-// app.model(require('./models/example').default);
+// 多个调用就用多个
+app.model(require('./models/counter').default);
+app.model(require('./models/example').default);
 
 // 可以先打印
 // console.log(require('./router'))
