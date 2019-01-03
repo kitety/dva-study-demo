@@ -25,3 +25,6 @@ app.router(RouterConfig);
 
 // 5. Start
 app.start('#root');
+// 里面有很多方法
+console.log(app);
+console.log(app._store.getState());
