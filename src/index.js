@@ -13,8 +13,9 @@ const app = dva({
 
 // 3. Model
 // 多个调用就用多个
-app.model(require('./models/counter').default);
-app.model(require('./models/example').default);
+require('./models').default.forEach(key => app.model(key.default))
+// app.model(require('./models/counter').default);
+// app.model(require('./models/example').default);
 
 // 可以先打印
 // console.log(require('./router'))

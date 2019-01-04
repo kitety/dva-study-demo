@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // counter=props.counter
 const Counter = ({ counter,dispatch }) => {
   // 无状态组件不用加this
-  console.log(counter, dispatch)
+  // console.log(counter, dispatch)
   return (
     <div>
       <h2>Counter</h2>

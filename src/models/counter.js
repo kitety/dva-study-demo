@@ -9,7 +9,11 @@ export default {
   // 异步方法
   effects: {
     // 不知道的参数都可以打印
-    *asyncAdd ({ payload }, { call, put }) {  // eslint-disable-line
+    *asyncAdd ({ payload }, { call, put, select }) {  // eslint-disable-line
+      // let counter = yield select(state => state.counter)
+      // let { counter } = yield select(_ => _)
+      let { counter } = yield select(state => state)
+      console.log(counter)
       yield call(delay, 2000)
       yield put({ type: 'add' });
     },
