@@ -1,23 +1,27 @@
 import React from 'react';
 import { connect } from 'dva';
 import PropTypes from 'prop-types'
+import {withRouter} from 'dva/router'
+
 // counter=props.counter
-const Counter = ({ counter,dispatch,counterAsyncAdd,counterAdd }) => {
+const Counter = (props) => {
   // 无状态组件不用加this
-  // console.log(counter, dispatch,counterAsyncAdd,counterAdd)
+  console.log(props)
   return (
     <div>
       <h2>Counter</h2>
-      <h1>{counter.count}</h1>
+      <h1>{props.counter.count}</h1>
       {/*counter中的 */}
       <p>
-      <button onClick={() => { dispatch({type:"counter/add",name:"test_name"})}}>+</button>
-      <button onClick={() => { dispatch({ type:"counter/asyncAdd",name:"test_name"})}}>async +</button>
+      <button onClick={() => { props.dispatch({type:"counter/add",name:"test_name"})}}>+</button>
+      <button onClick={() => { props.dispatch({ type:"counter/asyncAdd",name:"test_name"})}}>async +</button>
       </p>
       <p>
-      <button onClick={() => { counterAdd()}}>+</button>
-      <button onClick={() => { counterAsyncAdd()}}>async +</button>
+      <button onClick={() => { props.counterAdd()}}>+</button>
+      <button onClick={() => { props.counterAsyncAdd()}}>async +</button>
       </p>
+      <button onClick={()=>{props.history.push('/')}}>Go Index</button>
+      <a href="/">A Link</a>
     </div>
   );
 };
@@ -30,4 +34,4 @@ const mapStateToProps = (state, ownProps) => {
     counter: state.counter
   }
 }
-export default connect(mapStateToProps)(Counter);
+export default withRouter(connect(mapStateToProps)(Counter));

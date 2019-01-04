@@ -6,11 +6,11 @@ import { counterAdd,counterAsyncAdd } from '../actions';
 
 
 const CounterPage = props => {
-  // console.log(props)
+  console.log(props)
   // 这层引用就需要传递
   return (
     <div>
-      <Counter dispatch={props.dispatch} counterAdd={props.counterAdd} counterAsyncAdd={props.counterAsyncAdd}/>
+      <Counter dispatch={props.dispatch} counterAdd={props.counterAdd} counterAsyncAdd={props.counterAsyncAdd} history={props.history}/>
     </div>
   )
 }
