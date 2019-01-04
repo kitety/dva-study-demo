@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'dva';
 import PropTypes from 'prop-types'
-import {withRouter} from 'dva/router'
+import {withRouter,Link} from 'dva/router'
 
 // counter=props.counter
-const Counter = (props) => {
+const Counter = (props,context) => {
   // 无状态组件不用加this
-  console.log(props)
+  // console.log(props)
+  console.log(context)
   return (
     <div>
       <h2>Counter</h2>
@@ -20,14 +21,22 @@ const Counter = (props) => {
       <button onClick={() => { props.counterAdd()}}>+</button>
       <button onClick={() => { props.counterAsyncAdd()}}>async +</button>
       </p>
-      <button onClick={()=>{props.history.push('/')}}>Go Index</button>
-      <a href="/">A Link</a>
+      <button onClick={()=>{props.history.push('/')}}>Props Go Index</button>
+      <br/>
+      <a href="/">To Home(a标签重渲染)</a>
+      <br/>
+      <Link to="/">Link To Home</Link>
+      <br/>
+      <button onClick={()=>{context.router.history.push('/')}}>Context Go Back</button>
     </div>
   );
 };
 // 类型检查
 Counter.propTypes = {
   counter:PropTypes.object
+};
+Counter.contextTypes = {
+  router:PropTypes.object
 };
 const mapStateToProps = (state, ownProps) => {
   return {
