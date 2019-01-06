@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import PropTypes from 'prop-types'
-import {withRouter,Link} from 'dva/router'
+import {withRouter,Link ,routerRedux} from 'dva/router'
 
 // counter=props.counter
 const Counter = (props,context) => {
@@ -28,6 +28,8 @@ const Counter = (props,context) => {
       <Link to="/">Link To Home</Link>
       <br/>
       <button onClick={()=>{context.router.history.push('/')}}>Context Go Back</button>
+      <br/>
+      <button onClick={() => { props.dispatch(routerRedux.push('/'))}}>routerRedux Go Back</button>
     </div>
   );
 };
