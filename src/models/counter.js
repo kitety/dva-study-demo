@@ -1,4 +1,4 @@
-import { delay } from 'dva/saga'
+import { delay, dispatch } from 'dva/saga'
 import { routerRedux } from 'dva/router'
 import queryString from 'query-string'
 
@@ -8,6 +8,11 @@ export default {
   // 出事状态，等于任意类型的值
   state: {
     count: 12
+  },
+  subscriptions: {
+    setup ({ dispatch}) {  // eslint-disable-line
+      window.onresize = () => { dispatch({ type: 'add' }) }
+    }
   },
   // 异步方法
   effects: {
@@ -23,9 +28,9 @@ export default {
       // yield put(routerRedux.push('/'))
       yield put(routerRedux.push({
         pathname: '/',
-        hash:'hello',
+        hash: 'hello',
         search: queryString.stringify({
-          from:'testRouter'
+          from: 'testRouter'
         })
       }))
     },
