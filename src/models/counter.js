@@ -1,4 +1,7 @@
 import { delay } from 'dva/saga'
+import { routerRedux } from 'dva/router'
+import queryString from 'query-string'
+
 export default {
   // 命名空间区分，用来隔离
   namespace: "counter",
@@ -16,6 +19,15 @@ export default {
       console.log(counter)
       yield call(delay, 2000)
       yield put({ type: 'add' });
+      // this way can jump
+      // yield put(routerRedux.push('/'))
+      yield put(routerRedux.push({
+        pathname: '/',
+        hash:'hello',
+        search: queryString.stringify({
+          from:'testRouter'
+        })
+      }))
     },
   },
   // 同步方法
