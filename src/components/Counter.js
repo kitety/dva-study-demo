@@ -7,7 +7,7 @@ import {withRouter,Link ,routerRedux} from 'dva/router'
 const Counter = (props,context) => {
   // 无状态组件不用加this
   // console.log(props)
-  console.log(context)
+  // console.log(context)
   return (
     <div>
       <h2>Counter</h2>

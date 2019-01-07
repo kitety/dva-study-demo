@@ -17,7 +17,7 @@ export default {
     },
     setupHistory ({ dispatch,history}){
       history.listen(location=>{
-        console.log(location)
+        // console.log(location)
         // if (location.pathname==='/counter') {
         //   dispatch({ type: 'add' })
         //   // 路径进行判断
@@ -36,7 +36,7 @@ export default {
       // let counter = yield select(state => state.counter)
       // let { counter } = yield select(_ => _)
       let { counter } = yield select(state => state)
-      console.log(counter)
+      // console.log(counter)
       yield call(delay, 2000)
       yield put({ type: 'add' });
       // this way can jump
@@ -60,13 +60,13 @@ export default {
     // },
     // 这样也可以
     "add/number" (state, action) {
-      console.log(action)
+      // console.log(action)
       return {
         count: state.count + 1
       };
     },
     "add" (state, action) {
-      console.log(action)
+      // console.log(action)
       return {
         count: state.count + 1
       };
