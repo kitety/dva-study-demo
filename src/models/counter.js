@@ -1,6 +1,7 @@
 import { delay, dispatch } from 'dva/saga'
 import { routerRedux } from 'dva/router'
 import queryString from 'query-string'
+var pathToRegexp = require('path-to-regexp')
 
 export default {
   // 命名空间区分，用来隔离
@@ -10,8 +11,22 @@ export default {
     count: 12
   },
   subscriptions: {
+    // 每个页面都会执行这些内容
     setup ({ dispatch}) {  // eslint-disable-line
       window.onresize = () => { dispatch({ type: 'add' }) }
+    },
+    setupHistory ({ dispatch,history}){
+      history.listen(location=>{
+        console.log(location)
+        // if (location.pathname==='/counter') {
+        //   dispatch({ type: 'add' })
+        //   // 路径进行判断
+        // }
+        const match = pathToRegexp('/counter').exec(location.pathname)
+        if (match) {
+          dispatch({ type: 'add' })
+        }
+      })
     }
   },
   // 异步方法
