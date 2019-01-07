@@ -1,12 +1,12 @@
-
+import axios from 'axios'
 export default {
 
   namespace: 'user',
 
   state: {
-    isFetching:false,
-    error:null,
-    user:null
+    isFetching: false,
+    error: null,
+    user: null
   },
 
   subscriptions: {
@@ -15,14 +15,27 @@ export default {
   },
 
   effects: {
-    *fetch ({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'save' });
+    *fetch (_, { call, put }) {  // eslint-disable-line
+      yield put({ type: 'fetch/start' });
+      const user = yield call(axios.get, "https://jsonplaceholder.typicode.com/users")
+      yield put({ type: "fetch/success", user: user })
     },
   },
 
   reducers: {
-    save (state, action) {
-      return { ...state, ...action.payload };
+    "fetch/start" (state, action) {
+      return {
+        isFetching: true,
+        error: null,
+        user: null
+      }
+    },
+    "fetch/success" (state, action) {
+      return {
+        isFetching: false,
+        error: null,
+        user: action.user
+      }
     },
   },
 
