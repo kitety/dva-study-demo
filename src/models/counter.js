@@ -1,4 +1,4 @@
-import { delay, dispatch } from 'dva/saga'
+import { delay } from 'dva/saga'// 不是在这里引用的dispatch 而使用的props传递
 import { routerRedux } from 'dva/router'
 import queryString from 'query-string'
 var pathToRegexp = require('path-to-regexp')

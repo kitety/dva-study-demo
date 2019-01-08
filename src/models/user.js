@@ -17,8 +17,12 @@ export default {
   effects: {
     *fetch (_, { call, put }) {  // eslint-disable-line
       yield put({ type: 'fetch/start' });
-      const user = yield call(axios.get, "https://jsonplaceholder.typicode.com/users")
-      yield put({ type: "fetch/success", user: user })
+      try {
+        const user = yield call(axios.get, "https://jsonplaceholder.typicode.com/users")
+        yield put({ type: "fetch/success", user: user })
+      } catch (error) {
+        yield put({ type: "fetch/fail", error: error.message })
+      }
     },
   },
 
@@ -35,6 +39,13 @@ export default {
         isFetching: false,
         error: null,
         user: action.user
+      }
+    },
+    "fetch/fail" (state, action) {
+      return {
+        isFetching: false,
+        error: action.error,
+        user: null
       }
     },
   },

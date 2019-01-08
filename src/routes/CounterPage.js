@@ -6,7 +6,8 @@ import { counterAdd,counterAsyncAdd } from '../actions';
 
 
 const CounterPage = props => {
-  console.log(props)
+  // connect不指定mapDispatchToProps就可以取出来
+  console.log(props.dispatch)
   // 这层引用就需要传递
   return (
     <div>
@@ -20,4 +21,5 @@ const mapStateToProps = (state, ownProps) => {
     counter: state.counter
   }
 }
+// 如果不指定mapDispatchToProps就可以在props中取出props
 export default connect(mapStateToProps,{ counterAdd,counterAsyncAdd })(CounterPage);

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'dva'
-import { dispatch} from "dva/saga";
+// import { dispatch} from "dva/saga";
 
 const User = (props) => {
   console.log(props);
@@ -17,7 +17,7 @@ const User = (props) => {
   return (
     <div>
       <h1>{data}</h1>
-      <button onClick={() => { dispatch({type:"user/fetch"})}}>Get User</button>
+      <button onClick={() => { props.dispatch({type:"user/fetch"})}}>Get User</button>
     </div>
   )
 }
@@ -27,4 +27,4 @@ const mapStateToProps = (state, ownProps) => {
     user: state.user
   }
 }
-export default connect(mapStateToProps, {})(User);
+export default connect(mapStateToProps)(User);
