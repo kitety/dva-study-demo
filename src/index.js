@@ -2,6 +2,7 @@ import dva from 'dva';
 import './index.css';
 import RouterConfig from './router'
 import createHistory from 'history/createBrowserHistory';
+import createLoading from 'dva-loading'
 
 // 1. Initialize
 const app = dva({
@@ -10,6 +11,7 @@ const app = dva({
 
 // 2. Plugins
 // app.use({});
+app.use(createLoading());
 
 // 3. Model
 // 多个调用就用多个
