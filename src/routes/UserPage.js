@@ -4,7 +4,7 @@ import { connect } from 'dva'
 
 const User = (props) => {
   console.log(props.loading);
-  const {  error, user } = props.user
+  const { error, user } = props.user
   // const { isFetching, error, user } = props.user
 
   // 下面两种都可以，global是全局，effects是针对的某个action
@@ -22,8 +22,10 @@ const User = (props) => {
   return (
     <div>
       <h1>{data}</h1>
-      <button onClick={() => { props.dispatch({type:"user/fetch"})}}>Get User</button>
-      <button onClick={() => { props.dispatch({type:"user/fetch/start"})}}>Get User Start</button>
+      <button onClick={() => { props.dispatch({ type: "user/fetch" }) }}>Get User</button>
+      <button onClick={() => { props.dispatch({ type: "user/fetch/start" }) }}>Get User Start</button>
+      {/* onEffect */}
+      <button onClick={() => { props.dispatch({ type: "SHOW" }) }}>onEffect</button>
     </div>
   )
 }

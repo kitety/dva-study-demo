@@ -19,13 +19,35 @@ const error = store => next => action => {
     console.log('error:' + error)
   }
 }
-
+// extraReducers
+const extraReducers = {
+  form (state = false, action) {
+    switch (action.type) {
+      case 'SHOW':
+        return true
+      case 'HIDE':
+        return false
+      default:
+        return false
+    }
+  }
+}
+// onEffect
+const onEffect = (effect, { put }, model, key) => {
+  return function* (...args) {
+    yield put({ type: 'SHOW' })
+    yield effect(...args)
+    yield put({ type: 'HIDE' })
+  }
+}
 // 1. Initialize
 const app = dva({
   history: createHistory(),
   // onAction: createLogger()
   // 在 action 被 dispatch 时触发，用于注册 redux 中间件。支持函数或函数数组格式
-  onAction: [logger, error]
+  onAction: [logger, error],
+  extraReducers,
+  onEffect
 });
 
 // 2. Plugins
