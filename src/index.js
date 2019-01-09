@@ -3,10 +3,29 @@ import './index.css';
 import RouterConfig from './router'
 import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading'
+import { createLogger } from 'redux-logger';
+
+// 自己的中间件
+const logger = store => next => action => {
+  console.log('dispating', action);
+  let result = next(action);
+  console.log('next State', store.getState());
+  return result
+}
+const error = store => next => action => {
+  try {
+    next(action);
+  } catch (error) {
+    console.log('error:' + error)
+  }
+}
 
 // 1. Initialize
 const app = dva({
   history: createHistory(),
+  // onAction: createLogger()
+  // 在 action 被 dispatch 时触发，用于注册 redux 中间件。支持函数或函数数组格式
+  onAction: [logger, error]
 });
 
 // 2. Plugins
